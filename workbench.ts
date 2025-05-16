@@ -25,6 +25,7 @@ declare const window: any;
   }
 
   const workspace = { folderUri: URI.parse(document.location.href) };
+  workspace.folderUri.scheme = "memfs";
   const workspaceProvider: IWorkspaceProvider = {
     workspace,
     open: async (
