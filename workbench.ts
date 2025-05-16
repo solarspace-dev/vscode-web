@@ -1,17 +1,13 @@
 import {
   create
 } from "vs/workbench/workbench.web.main";
-import { URI, UriComponents } from "vs/base/common/uri";
+import { URI } from "vs/base/common/uri";
 import { IWorkbenchConstructionOptions, IWorkspace, IWorkspaceProvider } from "vs/workbench/browser/web.api";
 declare const window: any;
 
 (async function () {
   // create workbench
-  let config: IWorkbenchConstructionOptions & {
-    folderUri?: UriComponents;
-    workspaceUri?: UriComponents;
-    domElementId?: string;
-  } = {};
+  let config: IWorkbenchConstructionOptions = {};
 
   if (window.product) {
     config = window.product;
@@ -28,30 +24,17 @@ declare const window: any;
     config = tempConfig;
   }
 
-  let workspace;
-  if (config.folderUri) {
-    workspace = { folderUri: URI.revive(config.folderUri) };
-  } else if (config.workspaceUri) {
-    workspace = { workspaceUri: URI.revive(config.workspaceUri) };
-  } else {
-    workspace = undefined;
-  }
+  const workspace = { folderUri: URI.parse(document.location.href) };
+  const workspaceProvider: IWorkspaceProvider = {
+    workspace,
+    open: async (
+      workspace: IWorkspace,
+      options?: { reuse?: boolean; payload?: object }
+    ) => true,
+    trusted: true,
+  };
+  config = { ...config, workspaceProvider };
 
-  if (workspace) {
-    const workspaceProvider: IWorkspaceProvider = {
-      workspace,
-      open: async (
-        workspace: IWorkspace,
-        options?: { reuse?: boolean; payload?: object }
-      ) => true,
-      trusted: true,
-    };
-    config = { ...config, workspaceProvider };
-  }
-
-  const domElement = !!config.domElementId
-    && document.getElementById(config.domElementId)
-    || document.body;
-
+  const domElement = document.body;
   create(domElement, config);
 })();
