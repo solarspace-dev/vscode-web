@@ -68,13 +68,6 @@ if (!fs.existsSync("node_modules")) {
   ok("node_modules exists. Skipping yarn");
 }
 
-// Use simple workbench
-note("copying workbench file");
-fs.copyFileSync(
-  "../workbench.ts",
-  "src/vs/code/browser/workbench/workbench.ts"
-);
-
 // Compile
 note("starting compile");
 exec("yarn gulp vscode-web-min", { stdio: "inherit" });

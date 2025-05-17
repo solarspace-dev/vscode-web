@@ -1,32 +1,23 @@
 {
   "name": "@solarspace-dev/vscode-web",
-  "version": "1.92.0-2",
+  "version": "1.100.0-solarspace.0",
   "description": "Visual Studio Code for browser",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "node build.js",
-    "prepare-demo": "node prepare-demo.js",
-    "demo": "node ./demo/http.js"
+    "build": "node build.js"
   },
+  "authors": ["Raoul Schaffranek"],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/solarspace-dev/vscode-web.git"
   },
-  "authors": [
-    "Felix B",
-    "Raoul Schaffranek"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/solarspace-dev/vscode-web/issues"
-  },
+  "bugs": "https://github.com/solarspace-dev/vscode-web/issues",
   "homepage": "https://github.com/solarspace-dev/vscode-web#readme",
   "devDependencies": {
-    "express": "^4.17.1",
     "fs-extra": "^9.0.1"
   },
-  "dependencies": {},
   "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
