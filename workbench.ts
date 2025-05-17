@@ -24,7 +24,8 @@ declare const window: any;
     config = tempConfig;
   }
 
-  const workspace = { folderUri: URI.parse(document.location.href).with({ scheme: "memfs" }) };
+  const location = document.location.href;
+  const workspace = { folderUri: URI.parse(`tmp:///?location=${encodeURIComponent(location)}`) };
   const workspaceProvider: IWorkspaceProvider = {
     workspace,
     open: async (
