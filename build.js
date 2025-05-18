@@ -70,8 +70,9 @@ if (!fs.existsSync("node_modules")) {
 
 // Compile
 note("starting compile");
-exec("npm run gulp bundle-vscode-reh-web", { stdio: "inherit"  });
-exec("npm run gulp vscode-web-min", { stdio: "inherit" });
+const gulp = "node --max-old-space-size=8192 --optimize-for-size ./node_modules/gulp/bin/gulp.js"
+exec(`${gulp} vscode-web-min`, { stdio: "inherit" });
+exec(`${gulp} minify-vscode-reh-web`, { stdio: "inherit"});
 ok("compile completed");
 
 // Extract compiled files
@@ -83,5 +84,6 @@ if (fs.existsSync("../dist")) {
 }
 
 fs.mkdirSync("../dist");
-fse.copySync("../vscode-web", "../dist");
+fse.copySync("./out-vscode-web-min", "../dist");
+fse.copySync("./out-vscode-reh-web-min", "../dist");
 ok("copied ../vscode-web to ../dist");
