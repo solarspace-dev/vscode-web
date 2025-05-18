@@ -70,6 +70,7 @@ if (!fs.existsSync("node_modules")) {
 
 // Compile
 note("starting compile");
+exec("npm run gulp bundle-vscode-reh-web", { stdio: "inherit"  });
 exec("npm run gulp vscode-web-min", { stdio: "inherit" });
 ok("compile completed");
 
