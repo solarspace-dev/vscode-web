@@ -2,9 +2,7 @@ const process = require("process");
 const child_process = require("child_process");
 const fs = require("fs");
 const fse = require("fs-extra");
-const { version } = require("./package.json");
-
-const vscodeVersion = version.split("-")[0];
+const { vscodeVersion } = require("./package.json");
 
 function error(msg) {
   console.info("\x1b[31merror %s\x1b[0m", msg);
